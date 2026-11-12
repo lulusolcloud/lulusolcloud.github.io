@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LULU</title>
+<meta name="description" content="LULU, a cloud character coin on Solana. Fixed supply, mint revoked, liquidity locked.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lulusolcloud.github.io/">
+<meta property="og:title" content="LULU">
+<meta property="og:description" content="A cloud character coin floating on Solana. Fixed supply, run in the open.">
+<meta property="og:image" content="https://lulusolcloud.github.io/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@lulusolcloud">
+<link rel="icon" href="https://gateway.irys.xyz/l3oLwayiz1ddZDKsoHpPwve9gKIhBqLWa3ExmyiWLO8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one calm column — a cloud mascot opening, then a plain "check it yourself" ledger of on-chain facts. */
+:root{
+  --bg:#f6f3fb;
+  --surface:#ffffff;
+  --ink:#241a3a;
+  --muted:#6b6283;
+  --line:#e2dcef;
+  --violet:#5b34b0;
+  --violet-soft:#ece5fa;
+  --gold:#b98a12;
+  --ok:#1f7a4d; --ok-bg:#e3f4ea;
+  --wait:#8a5a00; --wait-bg:#fbf0d9;
+  --font-display:"Fredoka","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#130e22;--surface:#1c1530;--ink:#efeafb;--muted:#a79fc0;--line:#2f2648;
+  --violet:#a98bf0;--violet-soft:#271d42;--gold:#f3d36b;
+  --ok:#7fd8a6;--ok-bg:#163326;--wait:#f0c46a;--wait-bg:#33270f;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#130e22;--surface:#1c1530;--ink:#efeafb;--muted:#a79fc0;--line:#2f2648;
+  --violet:#a98bf0;--violet-soft:#271d42;--gold:#f3d36b;
+  --ok:#7fd8a6;--ok-bg:#163326;--wait:#f0c46a;--wait-bg:#33270f;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));}
+.wrap{max-width:720px;margin:0 auto;padding-block:48px 72px;display:flex;flex-direction:column;gap:56px}
+a{color:var(--violet);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+
+.hero{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.coin{width:168px;height:168px;border-radius:50%;display:block;
+  filter:drop-shadow(0 10px 24px color-mix(in srgb,var(--violet) 30%,transparent));
+  animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media (prefers-reduced-motion:reduce){.coin{animation:none}}
+.name{font-family:var(--font-display);font-weight:600;font-size:clamp(3rem,10vw,4.5rem);line-height:1;margin:0;letter-spacing:.02em;text-wrap:balance}
+.lede{margin:12px 0 0;font-size:1.1rem;color:var(--muted);max-width:36ch;text-wrap:balance}
+@media (max-width:520px){.hero{grid-template-columns:1fr;justify-items:center;text-align:center}.lede{margin-inline:auto}.coin{width:140px;height:140px}}
+
+h2{font-family:var(--font-display);font-weight:600;font-size:1.6rem;margin:0 0 6px;text-wrap:balance}
+.sub{margin:0 0 20px;color:var(--muted)}
+
+.addr{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.addr code{font-family:var(--font-mono);font-size:.92rem;word-break:break-all;flex:1 1 260px;min-width:0}
+.btn{font:inherit;font-weight:600;font-size:.9rem;border:0;border-radius:999px;padding:9px 16px;cursor:pointer;background:var(--violet);color:var(--surface)}
+.btn:hover{filter:brightness(1.08)}
+.links{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-size:.95rem}
+
+.ledger{margin:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;padding:14px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.row dt{font-weight:600}
+.row dd{margin:0;font-family:var(--font-mono);font-variant-numeric:tabular-nums;text-align:right}
+.row .note{grid-column:1/-1;color:var(--muted);font-size:.9rem}
+.chip{display:inline-block;font-family:var(--font-body);font-size:.75rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 10px;border-radius:999px;margin-left:8px;vertical-align:2px}
+.chip.ok{background:var(--ok-bg);color:var(--ok)}
+.chip.wait{background:var(--wait-bg);color:var(--wait)}
+
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;counter-increment:s}
+.steps li::before{content:counter(s);width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:.85rem;font-weight:600;background:var(--violet-soft);color:var(--violet)}
+.steps li.done::before{content:"✓";background:var(--ok-bg);color:var(--ok)}
+
+.notice{background:var(--violet-soft);border-radius:14px;padding:18px 20px;font-size:.95rem}
+.notice p{margin:0}
+.notice p+p{margin-top:8px}
+footer{color:var(--muted);font-size:.85rem;text-align:center}
+.sparkle{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<main class="wrap">
+  <header class="hero">
+    <img class="coin" src="https://gateway.irys.xyz/l3oLwayiz1ddZDKsoHpPwve9gKIhBqLWa3ExmyiWLO8" alt="LULU mascot: a smiling white cloud inside a purple coin" width="168" height="168">
+    <div>
+      <h1 class="name">LULU</h1>
+      <p class="lede">A cloud character coin floating on Solana. Fixed supply, run in the open.</p>
+    </div>
+  </header>
+
+  <section aria-labelledby="addr-h">
+    <h2 id="addr-h">Token address</h2>
+    <p class="sub">Copycat tokens can appear. Always check that the address matches before you trade.</p>
+    <div class="addr">
+      <code id="mint">2NAK6pbyx4v9onsbnGGHCJ4WQn9kwWvydAooX9i8L3ev</code>
+      <button class="btn" id="copy" type="button">Copy address</button>
+    </div>
+    <div class="links">
+      <a href="https://solscan.io/token/2NAK6pbyx4v9onsbnGGHCJ4WQn9kwWvydAooX9i8L3ev" target="_blank" rel="noopener">View on Solscan</a>
+      <a href="https://explorer.solana.com/address/2NAK6pbyx4v9onsbnGGHCJ4WQn9kwWvydAooX9i8L3ev" target="_blank" rel="noopener">View on Solana Explorer</a>
+      <a href="https://x.com/lulusolcloud" target="_blank" rel="noopener">Official X @lulusolcloud</a>
+      <a href="https://dexscreener.com/solana/CWyKWToGYjTyJKc5m6wCKHuRdQDpe4a1eSNYvQHJRUAz" target="_blank" rel="noopener">Chart on DexScreener</a>
+      <a href="https://raydium.io/swap/?inputMint=sol&amp;outputMint=2NAK6pbyx4v9onsbnGGHCJ4WQn9kwWvydAooX9i8L3ev" target="_blank" rel="noopener">Trade on Raydium</a>
+      <a href="https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&amp;buy=2NAK6pbyx4v9onsbnGGHCJ4WQn9kwWvydAooX9i8L3ev" target="_blank" rel="noopener">Trade on Jupiter</a>
+    </div>
+  </section>
+
+  <section aria-labelledby="facts-h">
+    <h2 id="facts-h">Facts you can verify</h2>
+    <p class="sub">Everything below is recorded on-chain. Anyone can check it with the links above.</p>
+    <dl class="ledger">
+      <div class="row"><dt>Total supply</dt><dd>1,000,000,000</dd>
+        <span class="note">One billion tokens, 6 decimals.</span></div>
+      <div class="row"><dt>Minting <span class="chip ok">Revoked</span></dt><dd>Impossible</dd>
+        <span class="note">The mint authority has been removed. No one, including the creator, can ever create more LULU. <a href="https://solscan.io/tx/3nxrsmg9jmJWCYtbsPoGoXX3GjS3R1NcdGoPg5mL2Vb4vMVSWjgx3cKwkVm4MTd2JmntxZZwkdNMPNLoNdkSsWd6" target="_blank" rel="noopener">View the transaction</a></span></div>
+      <div class="row"><dt>Freezing <span class="chip ok">None</span></dt><dd>Impossible</dd>
+        <span class="note">There is no freeze authority. The creator cannot lock anyone's tokens.</span></div>
+      <div class="row"><dt>Liquidity pool <span class="chip ok">Live</span></dt><dd>Raydium</dd>
+        <span class="note">The entire supply went into a Raydium pool with 2.22 SOL. <a href="https://dexscreener.com/solana/CWyKWToGYjTyJKc5m6wCKHuRdQDpe4a1eSNYvQHJRUAz" target="_blank" rel="noopener">View the pool chart</a></span></div>
+      <div class="row"><dt>Liquidity lock <span class="chip ok">Locked</span></dt><dd>Burn &amp; Earn</dd>
+        <span class="note">All pool liquidity is permanently locked. The creator cannot withdraw it. The creator can still claim the liquidity provider share (about 0.21%) of the pool's 0.25% trading fee, as Burn &amp; Earn allows. <a href="https://solscan.io/tx/2tKb4EBeqoxZp6UwgrziZyGcPstMMzrW76e8mPtgCf7Qa1sPiZQPpDtzU59x6dGJoppainYQBcGThEs61Ui5W6Yn" target="_blank" rel="noopener">View the lock transaction</a></span></div>
+      <div class="row"><dt>Token standard</dt><dd>Token-2022</dd>
+        <span class="note">Name and symbol are stored in the token itself. The logo is linked from it. The token info update authority has been removed, so none of this can be changed. <a href="https://solscan.io/tx/bEBQi99zZYAUtHdB6xiL6KrLNrzgYN151uWHncTJbst1wScxHZkYhgWd7B5BRxN8JSuP8wFc6SqUSLhzD1EXxZD" target="_blank" rel="noopener">View the transaction</a></span></div>
+      <div class="row"><dt>Transfer fee <span class="chip ok">None</span></dt><dd>0%</dd>
+        <span class="note">No transfer fee, no transfer hook, no permanent delegate. Only the metadata extensions are used.</span></div>
+      <div class="row"><dt>Creator allocation <span class="chip ok">None</span></dt><dd>0%</dd>
+        <span class="note">The creator kept no tokens at launch.</span></div>
+    </dl>
+  </section>
+
+  <section aria-labelledby="road-h">
+    <h2 id="road-h">Progress</h2>
+    <p class="sub">What is done and what is left, as it stands.</p>
+    <ol class="steps">
+      <li class="done"><span>Mint 1B LULU on Solana</span><span class="chip ok">Done</span></li>
+      <li class="done"><span>Register logo and token info</span><span class="chip ok">Done</span></li>
+      <li class="done"><span>Permanently revoke mint authority</span><span class="chip ok">Done</span></li>
+      <li class="done"><span>Open Raydium pool with the full supply</span><span class="chip ok">Done</span></li>
+      <li class="done"><span>Lock pool liquidity</span><span class="chip ok">Done</span></li>
+      <li class="done"><span>Remove the token info update authority</span><span class="chip ok">Done</span></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="note-h">
+    <h2 id="note-h">Please read</h2>
+    <div class="notice">
+      <p>LULU is a community character coin. There is no company behind it and no promised utility.</p>
+      <p>There is no guarantee of any price. You can lose everything you spend. This page is not financial advice.</p>
+      <p>Liquidity is small, so the price can move sharply on a single trade.</p>
+      <p>We never DM first. There is no presale and no airdrop. Always check the token address above before you trade.</p>
+      <p>The creator makes no price targets or profit promises. Any account saying otherwise is not LULU. The only official account is @lulusolcloud on X.</p>
+    </div>
+  </section>
+
+  <footer><span class="sparkle">✦</span> LULU · Solana</footer>
+</main>
+
+<script>
+(function(){
+  var btn=document.getElementById('copy'), code=document.getElementById('mint');
+  btn.addEventListener('click',function(){
+    var t=code.textContent.trim();
+    var done=function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy address'},1600)};
+    var fallback=function(){var r=document.createRange();r.selectNodeContents(code);var s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Selected, press copy'};
+    try{ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,fallback)} else fallback() }catch(e){fallback()}
+  });
+})();
+</script>
+</body>
+</html>
